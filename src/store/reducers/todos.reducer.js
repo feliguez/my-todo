@@ -42,7 +42,7 @@ const todosReducer = (state = initialState, action) => {
         todos: state.todos.map(todo => {
           const isCurrentTodo = todo.id === action.payload.id;
           // si es el elemento que requerimos, cambiamos el estado
-          return isCurrentTodo ? { ...todo, status: true } : todo;
+          return isCurrentTodo ? { ...todo, completed: true } : todo;
         })
       };
     case TODO_UNCOMPLETED:
@@ -51,7 +51,7 @@ const todosReducer = (state = initialState, action) => {
         todos: state.todos.map(todo => {
           const isCurrentTodo = todo.id === action.payload.id;
           // si es el elemento que requerimos, cambiamos el estado
-          return isCurrentTodo ? { ...todo, status: false } : todo;
+          return isCurrentTodo ? { ...todo, uncompleted: false } : todo;
         })
       };
     case TODO_COUNTER:
