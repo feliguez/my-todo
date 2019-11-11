@@ -1,33 +1,50 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addTodo } from '../../store/actions/todos.actions';
+import React from 'react';
+import { Button, TextField, Grid } from '@material-ui/core';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker
+} from '@material-ui/pickers';
 
-const TodoForm = () => {
-  const dispatch = useDispatch();
+import './styles.css';
 
-  const [todo, setTodo] = useState({
-    completed: false,
-    uncompleted: true,
-    date: Date.now()
-  });
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log(todo);
-    dispatch(addTodo(todo));
-  };
-
-  const handleOnChange = e => {
-    setTodo({ ...todo, name: e.target.value });
-  };
-
+const TodoForm = ({ todo, onSubmit, onChangeName, onChangeDate }) => {
   return (
-    <div className="todoList">
-      <form action="" className="todoList-form" onSubmit={e => handleSubmit(e)}>
-        <input type="text" onChange={e => handleOnChange(e)} />
-        <button type="submit">Agregar</button>
-      </form>
-    </div>
+    <form className="todoList-form" onSubmit={onSubmit}>
+      <Grid container justify="space-around">
+        <TextField
+          label="Tarea"
+          margin="normal"
+          type="text"
+          onChange={onChangeName}
+          placeholder="Ir al supermercado"
+          value={todo.name}
+          autoFocus
+        />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            disableToolbar
+            format="dd/MM/yyyy"
+            margin="normal"
+            id="date-picker-inline"
+            label="Fecha de expiración"
+            value={todo.expirationDate}
+            onChange={onChangeDate}
+            KeyboardButtonProps={{
+              'aria-label': 'cambiar fecha'
+            }}
+          />
+        </MuiPickersUtilsProvider>
+        <Button
+          type="submit"
+          disabled={!todo.name}
+          variant="contained"
+          color="primary"
+        >
+          Agregar
+        </Button>
+      </Grid>
+    </form>
   );
 };
 
