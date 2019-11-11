@@ -1,3 +1,5 @@
+## Felipe Rodríguez's MY TODO list - an application project for GePro
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
