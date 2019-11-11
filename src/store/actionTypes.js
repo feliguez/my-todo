@@ -3,3 +3,4 @@ export const TODO_REMOVE = 'TODO_REMOVE';
 export const TODO_COMPLETED = 'TODO_COMPLETED';
 export const TODO_UNCOMPLETED = 'TODO_UNCOMPLETED';
 export const TODO_COUNTER = 'TODO_COUNTER';
+export const TODO_UPDATE = 'TODO_UPDATE';

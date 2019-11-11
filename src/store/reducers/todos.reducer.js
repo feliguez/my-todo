@@ -3,7 +3,8 @@ import {
   TODO_COMPLETED,
   TODO_REMOVE,
   TODO_UNCOMPLETED,
-  TODO_COUNTER
+  TODO_COUNTER,
+  TODO_UPDATE
 } from '../actionTypes';
 
 const initialState = {
@@ -42,7 +43,7 @@ const todosReducer = (state = initialState, action) => {
         todos: state.todos.map(todo => {
           const isCurrentTodo = todo.id === action.payload.id;
           // si es el elemento que requerimos, cambiamos el estado
-          return isCurrentTodo ? { ...todo, completed: true } : todo;
+          return isCurrentTodo ? { ...todo, completed: !todo.completed } : todo;
         })
       };
     case TODO_UNCOMPLETED:
@@ -52,6 +53,14 @@ const todosReducer = (state = initialState, action) => {
           const isCurrentTodo = todo.id === action.payload.id;
           // si es el elemento que requerimos, cambiamos el estado
           return isCurrentTodo ? { ...todo, uncompleted: false } : todo;
+        })
+      };
+    case TODO_UPDATE:
+      return {
+        ...state,
+        todos: state.todos.map(todo => {
+          const isCurrentTodo = todo.id === action.payload.id;
+          return isCurrentTodo ? { ...action.payload } : todo;
         })
       };
     case TODO_COUNTER:

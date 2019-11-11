@@ -3,7 +3,8 @@ import {
   TODO_COMPLETED,
   TODO_REMOVE,
   TODO_UNCOMPLETED,
-  TODO_COUNTER
+  TODO_COUNTER,
+  TODO_UPDATE
 } from '../actionTypes';
 
 export const addTodo = todo => {
@@ -30,6 +31,13 @@ export const uncompletedTodo = todo => {
 export const completedTodo = todo => {
   return {
     type: TODO_COMPLETED,
+    payload: todo
+  };
+};
+
+export const updateTodo = todo => {
+  return {
+    type: TODO_UPDATE,
     payload: todo
   };
 };
