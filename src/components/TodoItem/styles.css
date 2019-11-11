@@ -1,0 +1,11 @@
+.todoItem {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.todoItem-actions {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end !important;
+}
