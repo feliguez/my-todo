@@ -1,11 +1,14 @@
+import _ from 'lodash';
 import React from 'react';
+import FlipMove from 'react-flip-move';
 import { useDispatch } from 'react-redux';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import {
   completedTodo,
   uncompletedTodo
 } from '../../store/actions/todos.actions';
 import TodoItem from '../TodoItem/TodoItem';
-import _ from 'lodash';
+import './styles.css';
 
 const TodoList = ({ todos }) => {
   const dispatch = useDispatch();
@@ -18,15 +21,19 @@ const TodoList = ({ todos }) => {
   const byDate = _.sortBy(todos, ['expirationDate', 'completed']);
 
   return (
-    <div className="todo-list">
-      {byDate.map(todo => (
-        <TodoItem
-          todo={todo}
-          key={todo.id}
-          onCompleted={() => handleOnCompleted(todo)}
-        />
-      ))}
-    </div>
+    <TransitionGroup className="todo-list">
+      <FlipMove>
+        {byDate.map(todo => (
+          <CSSTransition key={todo.id} timeout={500} classNames="item">
+            <TodoItem
+              todo={todo}
+              key={todo.id}
+              onCompleted={() => handleOnCompleted(todo)}
+            />
+          </CSSTransition>
+        ))}
+      </FlipMove>
+    </TransitionGroup>
   );
 };
 

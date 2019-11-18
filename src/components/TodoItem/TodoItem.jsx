@@ -14,21 +14,22 @@ import {
   MuiPickersUtilsProvider
 } from '@material-ui/pickers';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateTodo } from '../../store/actions/todos.actions';
 import './styles.css';
 
 const TodoItem = ({ todo, onCompleted }) => {
   const dispatch = useDispatch();
-  const [updatedTodo, setUpdatedTodo] = useState({
-    ...todo
-  });
+  const [updatedTodo, setUpdatedTodo] = useState({ ...todo });
 
   const handleOnChangeDate = date => {
-    setUpdatedTodo({ ...updatedTodo, expirationDate: date });
-    dispatch(updateTodo(updatedTodo));
+    setUpdatedTodo({ ...todo, expirationDate: date });
   };
+
+  useEffect(() => {
+    dispatch(updateTodo(updatedTodo));
+  }, [dispatch, updatedTodo]);
 
   const Completed = () =>
     todo.completed ? (
