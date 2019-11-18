@@ -50,7 +50,7 @@ const Home = () => {
         Cosas por hacer
       </Typography>
       <Typography paragraph align="center">
-        Hoy: {moment(Date.now()).format('l')}
+        Hoy: {moment(Date.now()).format('D[/]M[/]YY')}
       </Typography>
       <TodoForm
         todo={todo}
